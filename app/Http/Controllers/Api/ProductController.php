@@ -19,20 +19,14 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         try {
-
-            $productsArr = [
-                'sku' => $request->sku,
-                'name' => $request->name,
-                'description' => $request->description,
-                'price' => $request->price,
-                'stock' => $request->stock
-            ];
-
-            $response = Product::create($productsArr);
-
-            if ($response) {
-                return $response;
-            }
+            $product = new Product;
+            $product->sku = $request->sku;
+            $product->name = $request->name;
+            $product->description = $request->description;
+            $product->price = $request->price;
+            $product->stock = $request->stock;
+            $product->save();
+            return $product;
 
         } catch (\Throwable $th) {
             return "Something went wrong";
